@@ -19,7 +19,7 @@ import br.com.mathewsalves.jwt.filter.JwtAuthenticationTokenFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class GatewayConfig extends WebSecurityConfigurerAdapter{
 	
-	private static final String[] PUBLIC_POST = { "/case-project-candidate/", "/case-project-auth/"};
+	private static final String[] PUBLIC_POST = { "/case-project-candidate/"};
 	
 //	private static final String[] OPERATOR = { "/hr-worker/**" };
 //	
@@ -52,7 +52,7 @@ public class GatewayConfig extends WebSecurityConfigurerAdapter{
     	.and().authorizeRequests()
 		.antMatchers(HttpMethod.POST, PUBLIC_POST).permitAll()
 		.antMatchers(HttpMethod.DELETE, PUBLIC_POST).permitAll()
-		.antMatchers("/h2-console/**").permitAll()
+		.antMatchers("/case-project-auth/**").permitAll()
 		.anyRequest().authenticated();
 		
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);

@@ -16,20 +16,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "candidate_tb")
-public class Candidate {
+@Table(name = "credit_card_tb")
+public class CreditCard {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-    private String coluname;
+	private Integer candidateId;
 
-    private String username;
+    private String apelido;
 
-    private String password;
+    private String cardNumber;
 
-    private String cpf;
+    private String validateDate;
 
-    private String email;
+    private String cvv;
 }

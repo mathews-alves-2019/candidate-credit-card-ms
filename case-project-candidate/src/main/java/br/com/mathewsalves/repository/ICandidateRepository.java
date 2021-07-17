@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.mathewsalves.entity.Candidate;
 
+
 public interface ICandidateRepository extends JpaRepository<Candidate, Integer> {
 
 	Optional<Candidate> findByUsername(String username);
