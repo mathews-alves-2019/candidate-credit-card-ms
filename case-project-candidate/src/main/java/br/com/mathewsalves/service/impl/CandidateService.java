@@ -138,7 +138,7 @@ public class CandidateService implements ICandidateService {
 		List<CandidateDTO> candidates = CandidateMapper.modelListToDtoList(repository.findAll());
 		List<CandidateDTO> candidatesResponse = new ArrayList<CandidateDTO>();
 
-		if(!candidatesResponse.isEmpty()) {
+		if(!candidates.isEmpty()) {
 			for(CandidateDTO candidate : candidates) {
 				List<CreditCardDTO> creditCardDTO = client.findByCandidateId(candidate.getId()).getBody();
 

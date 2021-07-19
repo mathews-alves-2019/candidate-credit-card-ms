@@ -19,12 +19,9 @@ import br.com.mathewsalves.jwt.filter.JwtAuthenticationTokenFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class GatewayConfig extends WebSecurityConfigurerAdapter{
 	
-	private static final String[] PUBLIC_POST = { "/case-project-candidate/"};
-	
-//	private static final String[] OPERATOR = { "/hr-worker/**" };
-//	
-//	private static final String[] ADMIN = { "/hr-payroll/**", "/hr-user/**", "/actuator/**", "/hr-worker/actuator/**", "/hr-oauth/actuator/**" };
-//	
+	private static final String[] PUBLIC_POST = { "/case-project-candidate/", "/case-project-auth/**"};
+	private static final String[] PUBLIC_DELETE = { "/case-project-candidate/**"};
+
 	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -51,8 +48,7 @@ public class GatewayConfig extends WebSecurityConfigurerAdapter{
     	.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     	.and().authorizeRequests()
 		.antMatchers(HttpMethod.POST, PUBLIC_POST).permitAll()
-		.antMatchers(HttpMethod.DELETE, PUBLIC_POST).permitAll()
-		.antMatchers("/case-project-auth/**").permitAll()
+		.antMatchers(HttpMethod.DELETE, PUBLIC_DELETE).permitAll()
 		.anyRequest().authenticated();
 		
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
