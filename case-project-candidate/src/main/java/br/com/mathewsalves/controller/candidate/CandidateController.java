@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.mathewsalves.dto.CandidateDTO;
+import br.com.mathewsalves.dto.CandidateDeleteDTO;
 import br.com.mathewsalves.model.Response;
 import br.com.mathewsalves.service.impl.CandidateService;
 
@@ -30,7 +31,7 @@ public class CandidateController {
 	private CandidateService service;
 	
 	@PostMapping
-	public ResponseEntity<Response> create(@Valid @RequestBody CandidateDTO userDto, BindingResult result){
+	public ResponseEntity<Response> create(@Valid @RequestBody CandidateDTO cadidateDTO, BindingResult result){
 		if (result.hasErrors())	{
 			List<String> errors = new ArrayList<>();
 			result.getAllErrors().forEach(e -> errors.add(e.getDefaultMessage()));
@@ -44,8 +45,30 @@ public class CandidateController {
 		return ResponseEntity.ok(Response.builder()
 				.status(HttpStatus.OK.value())
 				.dateTime(LocalDateTime.now())
-				.data(service.save(userDto))
+				.data(service.save(cadidateDTO))
 				.build());
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<Response> deleteByEmail(@Valid @RequestBody CandidateDeleteDTO cadidateDTO, BindingResult result){
+		if (result.hasErrors())	{
+			List<String> errors = new ArrayList<>();
+			result.getAllErrors().forEach(e -> errors.add(e.getDefaultMessage()));
+			return ResponseEntity.ok(Response.builder()
+									.status(HttpStatus.BAD_REQUEST.value())
+									.dateTime(LocalDateTime.now())
+									.errors(errors)
+									.build());
+		}
+		
+		service.deleteByEmail(cadidateDTO.getEmail());
+
+		var response = Response.builder()
+				.status(HttpStatus.OK.value())
+				.dateTime(LocalDateTime.now())
+				.build();
+		
+		return ResponseEntity.ok(response);
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -69,6 +92,18 @@ public class CandidateController {
 				 .status(HttpStatus.OK.value())
 				 .dateTime(LocalDateTime.now())
 				 .data(responseData)
+				 .build();
+
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping
+	public ResponseEntity<Response> findAll() {
+
+		 var response = Response.builder()
+				 .status(HttpStatus.OK.value())
+				 .dateTime(LocalDateTime.now())
+				 .data(service.findAll())
 				 .build();
 
 		return ResponseEntity.ok(response);

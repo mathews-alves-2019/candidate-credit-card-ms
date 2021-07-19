@@ -14,4 +14,5 @@ public interface ICandidateRepository extends JpaRepository<Candidate, Integer> 
     Optional<Candidate> findByEmail(String email);
     Optional<Candidate> findByCpf(String cpf);
     Optional<Candidate> findByUsernameAndPassword(String username, String password);
+    void deleteByEmail(String email);
 }

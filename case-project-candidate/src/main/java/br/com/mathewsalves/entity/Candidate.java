@@ -23,8 +23,6 @@ public class Candidate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-    private String coluname;
-
     private String username;
 
     private String password;

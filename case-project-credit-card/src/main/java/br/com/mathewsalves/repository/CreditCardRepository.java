@@ -40,7 +40,7 @@ public class CreditCardRepository implements Serializable {
         return creditCard;
     }
     
-    public List<CreditCard> list() {
+    public List<CreditCard> findAll() {
         return manager.createQuery("Select c from CreditCard c", CreditCard.class).getResultList();
     }
     
@@ -48,11 +48,11 @@ public class CreditCardRepository implements Serializable {
         return manager.find(CreditCard.class, id);
     }
     
-    public CreditCard findByCandidateId(int candidateId) {
+    public List<CreditCard> findByCandidateId(int candidateId) {
         Query query = manager.createQuery("Select c from CreditCard c where c.candidateId = :candidateId");
         query.setParameter("candidateId", candidateId);
         
-        return (CreditCard) query.getSingleResult();
+        return query.getResultList();
     }
 
 }

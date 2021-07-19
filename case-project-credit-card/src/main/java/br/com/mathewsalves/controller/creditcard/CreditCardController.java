@@ -24,7 +24,7 @@ import br.com.mathewsalves.service.impl.CreditCardService;
 
 @RestController
 @RequestMapping(value = "/")
-public class CandidateController {
+public class CreditCardController {
 	
 	@Autowired
 	private CreditCardService service;
@@ -69,6 +69,30 @@ public class CandidateController {
 				 .status(HttpStatus.OK.value())
 				 .dateTime(LocalDateTime.now())
 				 .data(responseData)
+				 .build();
+
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value = "/candidate/{candidateId}")
+	public ResponseEntity<Response> findByCandidateId(@PathVariable Integer candidateId) {
+		var responseData = service.findByCandidateId(candidateId);
+
+		 var response = Response.builder()
+				 .status(HttpStatus.OK.value())
+				 .dateTime(LocalDateTime.now())
+				 .data(responseData)
+				 .build();
+
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping
+	public ResponseEntity<Response> findAll() {
+		 var response = Response.builder()
+				 .status(HttpStatus.OK.value())
+				 .dateTime(LocalDateTime.now())
+				 .data(service.findAll())
 				 .build();
 
 		return ResponseEntity.ok(response);

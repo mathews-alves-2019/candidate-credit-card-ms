@@ -1,5 +1,8 @@
 package br.com.mathewsalves.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -39,4 +42,7 @@ public class CandidateDTO {
     @Email
     @EmailExists
     private String email;
+    
+    @Builder.Default
+    private List<CreditCardDTO> creditCard = new ArrayList<CreditCardDTO>();
 }

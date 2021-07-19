@@ -23,8 +23,6 @@ public class CreditCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private Integer candidateId;
-
     private String apelido;
 
     private String cardNumber;
